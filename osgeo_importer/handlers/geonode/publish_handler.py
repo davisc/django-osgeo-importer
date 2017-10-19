@@ -132,7 +132,9 @@ class GeoNodePublishHandler(ImportHandlerMixin):
 
         # Add fields to new_layer.attribute_set
         if fields:
+            logger.debug(fields)
             attribute_map = [[f['name'], f['type'], f['description'], f['label']] for f in fields]
+            logger.debug(attribute_map)
             set_attributes(new_layer, attribute_map)
 
         if self.importer.upload_file and created:
