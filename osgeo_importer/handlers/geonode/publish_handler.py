@@ -81,7 +81,7 @@ class GeoNodePublishHandler(ImportHandlerMixin):
             layer_title = layer_config.get('name', layer)
             store_name = self.store_name(layer_config)
             store_type = 'dataStore'
-            fields = layer_config['fields']
+            fields = layer_config['attributes']
         elif layer_type == 'tile':
             if 'layer_name' not in layer_config:
                 logger.warn('No layer name set, using uuid "{}" as layer name.'.format(layer_uuid))
@@ -132,7 +132,7 @@ class GeoNodePublishHandler(ImportHandlerMixin):
 
         # Add fields to new_layer.attribute_set
         if fields:
-            attribute_map = [[f['name'], f['type']] for f in fields]
+            attribute_map = [[f['name'], f['type'], f['description'], f['label']] for f in fields]
             set_attributes(new_layer, attribute_map)
 
         if self.importer.upload_file and created:
