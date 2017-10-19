@@ -34,8 +34,15 @@ def set_attributes_bw_compat(layer, attribute_map, overwrite=False, attribute_st
         'label': 3,
         'display_order': 4,
     }
+    logger.debug(attribute_map)
     for attribute in attribute_map:
-        attribute.extend((None, None, 0))
+        if len(attribute) == 2:
+            attribute.extend((None, None, 0))
+        elif len(attribute) == 3:
+            attribute.extend((None, 0))
+        elif len(attribute) == 4:
+            attribute.extend((0))
+
 
     attributes = layer.attribute_set.all()
     # Delete existing attributes if they no longer exist in an updated layer
