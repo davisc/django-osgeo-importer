@@ -502,6 +502,8 @@ class ImportHelper(object):
                 for layer_desc in description:
                     configuration_options = DEFAULT_LAYER_CONFIGURATION.copy()
                     configuration_options.update({'index': layer_desc.get('index')})
+                    if upfile_ext.lower() == '.sld':
+                        configuration_options.update({'styles': [upfile_ext]})
                     # layer_basename is the string to start the layer name with
                     # The inspector will use a full path to the file for .tif layer names.
                     # We'll use just the basename of the path (no modification if it's not a path).
